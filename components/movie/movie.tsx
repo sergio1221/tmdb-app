@@ -20,7 +20,7 @@ export const MovieItem: React.FC<MovieItemProps> = (props) => {
   }, [onSelect])
 
   return (
-    <a target='_blank' href={item.link}>
+    <a target='_blank' href={item.link} rel='noreferrer'>
       <Card className={wrapperClass}>
         <Card.Img variant='top' src={item.image} srcSet={item.srcset} loading='lazy' />
         <Card.Body>
