@@ -12,7 +12,7 @@ export const Page: React.FC<PageProps> = (props) => {
 
   return (
     <div className='app'>
-      <Title value={title}/>
+      <Title value={title} />
 
       <header>
 

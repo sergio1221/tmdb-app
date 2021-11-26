@@ -7,7 +7,7 @@ import { MovieList } from 'components/movie/movie-list'
 import { useLoad } from 'hooks/use-load'
 import { Movie, SortType } from 'types/movie'
 import { discoverMovies } from 'service/client/discover'
-import { LOAD_MOVIES_STEP, PAGE_COUNT } from 'helpers/constants'
+import { LOAD_MOVIES_STEP } from 'helpers/constants'
 
 const Home: NextPage = () => {
 
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   const { data, error, busy } = useLoad<Movie>(step, sorting, discoverMovies)
 
   const handleLoad = useCallback(() => {
-    setStep(step => Math.min(step + 1, LOAD_MOVIES_STEP.length - 1))
+    setStep(step => step + 1)
   }, [])
 
   return (
@@ -47,9 +47,11 @@ const Home: NextPage = () => {
         <MovieList data={data} />
       </section>
 
-      <section className='actions'>
-        <Button variant='primary' onClick={handleLoad} className='w-100'>Load More Data</Button>
-      </section>
+      {step < (LOAD_MOVIES_STEP.length - 1) && (
+        <section className='actions'>
+          <Button variant='primary' onClick={handleLoad} className='w-100'>Load More Data</Button>
+        </section>
+      )}
     </Page>
   )
 }
