@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, ChangeEvent, useEffect } from 'react'
 import type { NextPage } from 'next'
 import { Spinner, Form, Button } from 'react-bootstrap'
 
@@ -16,8 +16,16 @@ const Home: NextPage = () => {
 
   const { data, error, busy } = useLoad<Movie>(step, sorting, discoverMovies)
 
+  useEffect(() => {
+    setStep(0)
+  }, [sorting])
+
   const handleLoad = useCallback(() => {
     setStep(step => step + 1)
+  }, [])
+
+  const sortChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setSorting(e.target.value as keyof typeof SortType)
   }, [])
 
   return (
@@ -30,7 +38,7 @@ const Home: NextPage = () => {
           aria-label='sort'
           value={sorting}
           className='w-auto'
-          onChange={v => setSorting(v.target.value as keyof typeof SortType)}
+          onChange={sortChange}
         >
           {Object.keys(SortType).map(key => (
             <option key={key} value={key}>

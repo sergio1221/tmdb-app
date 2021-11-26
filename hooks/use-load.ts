@@ -16,9 +16,17 @@ export function useLoad<T>(
   const [data, setData] = useState<T[]>([])
 
   useEffect(() => {
+    setData([])
+  }, [sorting])
+
+  useEffect(() => {
     const loadData = async () => {
       const startPage = data.length / PAGE_COUNT + 1
       const endPage = LOAD_MOVIES_STEP[step] / PAGE_COUNT
+
+      if (endPage < startPage) {
+        return
+      }
 
       try {
         setError('')
@@ -42,7 +50,7 @@ export function useLoad<T>(
     }
 
     loadData()
-  }, [step, sorting])
+  }, [step, data])
 
   return { data, error, busy }
 }
