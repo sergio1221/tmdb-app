@@ -1,4 +1,4 @@
-export const API_KEY = process.env.API_KEY ?? ''
+export const API_KEY = '5c03f016d370ff683c09e41cb63eb549'
 export const BASE_URL = 'https://api.themoviedb.org/3'
 export const IMGAG_BASE = 'https://image.tmdb.org/t/p/w220_and_h330_face'
 export const IMGAG_BASE2X = 'https://image.tmdb.org/t/p/w440_and_h660_face'
