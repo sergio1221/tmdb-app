@@ -43,6 +43,10 @@
       }
     }
   }
+
+  .actions {
+    @include my(16);
+  }
 }
 
 .movie-item {

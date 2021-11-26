@@ -32,14 +32,12 @@ export const MovieList: React.FC<MovieListProps> = (props) => {
   }, [])
 
   return (
-    <section className='movie-list'>
-      <Row>
-        {data.map(item => (
-          <Col className='col' key={item.id} style={{ marginTop: 16 }}>
-            <MovieItem item={item} onSelect={handleSelect} active={selected.includes(item.id)} />
-          </Col>
-        ))}
-      </Row>
-    </section>
+    <Row>
+      {data.map(item => (
+        <Col className='col' key={item.id} style={{ marginTop: 16 }}>
+          <MovieItem item={item} onSelect={handleSelect} active={selected.includes(item.id)} />
+        </Col>
+      ))}
+    </Row>
   )
 }

@@ -1,44 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import type { NextPage } from 'next'
-import { Spinner, Form } from 'react-bootstrap'
+import { Spinner, Form, Button } from 'react-bootstrap'
 
 import { Page, PageTitle } from 'components/base'
 import { MovieList } from 'components/movie/movie-list'
+import { useLoad } from 'hooks/use-load'
 import { Movie, SortType } from 'types/movie'
 import { discoverMovies } from 'service/client/discover'
+import { LOAD_MOVIES_STEP, PAGE_COUNT } from 'helpers/constants'
 
 const Home: NextPage = () => {
 
-  const [page, setPage] = useState(1)
+  const [step, setStep] = useState(0)
   const [sorting, setSorting] = useState<keyof typeof SortType>('vote_average.desc')
-  const [movies, setMovies] = useState<Movie[]>([])
 
-  const [busy, setBusy] = useState(false)
-  const [error, setError] = useState('')
+  const { data, error, busy } = useLoad<Movie>(step, sorting, discoverMovies)
 
-  useEffect(() => {
-    const fetchFn = async () => {
-      try {
-        setError('')
-        setBusy(true)
-        const { movies } = await discoverMovies(page, sorting)
-        console.log(movies)
-        setMovies(movies)
-      } catch (e: any) {
-        setError(e.response)
-      } finally {
-        setBusy(false)
-      }
-    }
-
-    fetchFn()
-  }, [page, sorting])
+  const handleLoad = useCallback(() => {
+    setStep(step => Math.min(step + 1, LOAD_MOVIES_STEP.length - 1))
+  }, [])
 
   return (
     <Page title='TMDB-List' className='movie-list-page relative'>
       <PageTitle value='Movie List' />
 
-      <Form.Group className='sort-bar'>
+      <section className='sort-bar'>
         <Form.Label className='m-0'>Sort: </Form.Label>
         <Form.Select
           aria-label='sort'
@@ -52,11 +38,18 @@ const Home: NextPage = () => {
             </option>
           ))}
         </Form.Select>
-      </Form.Group>
+      </section>
+
       {busy && <Spinner variant='primary' animation='border' className='absolute-center' />}
       {error && <div className='text-center error'>{error}</div>}
 
-      <MovieList data={movies} />
+      <section className='movie-list'>
+        <MovieList data={data} />
+      </section>
+
+      <section className='actions'>
+        <Button variant='primary' onClick={handleLoad} className='w-100'>Load More Data</Button>
+      </section>
     </Page>
   )
 }

@@ -29,7 +29,6 @@ export async function getMovies(page: number, sort: string): Promise<Movie[]> {
     page: `${page}`, sort_by: sort
   })
 
-  console.log(data)
   return data.results.map(item => ({
     id: item.id,
     title: item.title,
