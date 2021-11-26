@@ -1,0 +1,19 @@
+@mixin mx($value) {
+  margin-left: #{$value}px;
+  margin-right: #{$value}px;
+}
+
+@mixin my($value) {
+  margin-top: #{$value}px;
+  margin-bottom: #{$value}px;
+}
+
+@mixin px($value) {
+  padding-left: #{$value}px;
+  padding-right: #{$value}px;
+}
+
+@mixin py($value) {
+  padding-top: #{$value}px;
+  padding-bottom: #{$value}px;
+}

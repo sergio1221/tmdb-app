@@ -1,0 +1,40 @@
+@import './base/variables';
+@import './base/placeholders';
+@import './base/mixins';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  & main {
+    flex-grow: 1;
+    max-width: 1200px;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    @include my(24);
+  }
+
+  & footer {
+    @extend %flex-center;
+    font-size: 1.125rem;
+    color: $color-dark;
+    font-weight: 500;
+    height: 64px;
+  }
+}
