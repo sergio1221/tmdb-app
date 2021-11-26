@@ -1,0 +1,113 @@
+@import './base/variables';
+@import './base/placeholders';
+@import './base/mixins';
+
+a {
+  text-decoration: none;
+}
+
+.m-auto {
+  margin: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  @extend %transform-center;
+  transform: none;
+}
+
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.flex-center {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.error {
+  font-size: 1rem;
+  color: red;
+}
+
+.page-title {
+  font-weight: 600 !important;
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+.col-gap-2 {
+  column-gap: 2 !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.align-items-start {
+  align-items: flex-start !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.align-items-end {
+  align-items: flex-end !important;
+}
+
+.justify-content-start {
+  justify-content: flex-start !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+
+.justify-content-between {
+  justify-content: space-between !important;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.block {
+  display: block !important;
+}
+
+.hover-wrapper {
+  & .hover-child {
+    visibility: hidden;
+  }
+
+  &:hover .hover-child {
+    visibility: visible;
+  }
+}
